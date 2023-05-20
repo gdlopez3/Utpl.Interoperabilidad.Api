@@ -30,4 +30,4 @@ def obtener_persona(persona_id: int):
 
 @app.get("/")
 def read_root():
-    return {"Hello": "TEST PARA LA APP EN LA NUBE"}
+    return {"Hello": "TEST PARA\n LA APP EN LA NUBE"}
