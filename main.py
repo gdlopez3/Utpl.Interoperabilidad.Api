@@ -4,7 +4,7 @@ from typing import List, Optional
 
 app = FastAPI()
 
-class Persona (BaseModel):
+class Huesped (BaseModel):
     id: int
     nombre: str
     edad: int
@@ -12,16 +12,16 @@ class Persona (BaseModel):
 
 personasList = []
 
-@app.post("/personas", response_model=Persona)
-def crear_persona(person: Persona):
+@app.post("/personas", response_model=Huesped)
+def crear_persona(person: Huesped):
     personasList.append(person)
     return person 
 
-@app.get("/personas", response_model=List[Persona])
+@app.get("/personas", response_model=List[Huesped])
 def get_personas():
             return personasList
 
-@app.get("/personas/{persona_id}", response_model=Persona)
+@app.get("/personas/{persona_id}", response_model=Huesped)
 def obtener_persona(persona_id: int):
     for persona in personasList:
         if persona.id == persona_id:
