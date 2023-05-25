@@ -28,6 +28,16 @@ def obtener_persona(persona_id: int):
             return persona
     raise HTTPException(status_code=404, detail="persona no encontrada")
 
+@app.delete("/personas/{persona_id}")
+def eliminar_huesped (persona_id: int):
+    persona = next((p for p in personasList if p.id == persona_id), None)
+    if persona:
+        personasList.remove(persona)
+        return {"mensaje": "Persona Eliminada exitosamente"}
+    else:
+        raise HTTPException(status_code=404, detail="Persona no encontrada")
+    huesped_eliminado = personasList.pop(persona_id)
+
 @app.get("/")
 def read_root():
     return {"Hello": "TEST PARA LA APP EN LA NUBE ACTUALIZADO PARA CAPTURA DEBER"}
