@@ -19,7 +19,7 @@ def crear_huesped(person: Huesped):
     return person 
 
 @app.get("/huesped", response_model=List[Huesped])
-def get_personas():
+def get_huesped():
             return personasList
 
 @app.get("/huesped/{huesped_hab}", response_model=Huesped)
