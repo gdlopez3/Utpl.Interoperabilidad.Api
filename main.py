@@ -6,29 +6,30 @@ app = FastAPI()
 
 class Huesped (BaseModel):
     id: int
+    hab: int
     nombre: str
     edad: int
     ciudad: Optional[str] = None
 
 personasList = []
 
-@app.post("/personas", response_model=Huesped)
+@app.post("/huesped", response_model=Huesped)
 def crear_persona(person: Huesped):
     personasList.append(person)
     return person 
 
-@app.get("/personas", response_model=List[Huesped])
+@app.get("/huesped", response_model=List[Huesped])
 def get_personas():
             return personasList
 
-@app.get("/personas/{persona_id}", response_model=Huesped)
+@app.get("/huesped/{persona_id}", response_model=Huesped)
 def obtener_persona(persona_id: int):
     for persona in personasList:
         if persona.id == persona_id:
             return persona
     raise HTTPException(status_code=404, detail="persona no encontrada")
 
-@app.delete("/personas/{persona_id}")
+@app.delete("/huesped/{persona_id}")
 def eliminar_huesped (persona_id: int):
     persona = next((p for p in personasList if p.id == persona_id), None)
     if persona:
