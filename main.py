@@ -14,7 +14,7 @@ class Huesped (BaseModel):
 personasList = []
 
 @app.post("/huesped", response_model=Huesped)
-def crear_persona(person: Huesped):
+def crear_huesped(person: Huesped):
     personasList.append(person)
     return person 
 
@@ -22,12 +22,12 @@ def crear_persona(person: Huesped):
 def get_personas():
             return personasList
 
-@app.get("/huesped/{persona_id}", response_model=Huesped)
-def obtener_persona(persona_id: int):
-    for persona in personasList:
-        if persona.id == persona_id:
-            return persona
-    raise HTTPException(status_code=404, detail="persona no encontrada")
+@app.get("/huesped/{huesped_hab}", response_model=Huesped)
+def obtener_hab(huesped_hab: int):
+    for hab in personasList:
+        if huesped_hab == huesped_hab:
+            return hab
+    raise HTTPException(status_code=404, detail="huesped no encontrada")
 
 @app.delete("/huesped/{persona_id}")
 def eliminar_huesped (persona_id: int):
