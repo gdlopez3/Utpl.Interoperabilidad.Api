@@ -1,12 +1,25 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
+import uuid
+#seccion mongo_importar libreria
+import pymongo
 
 app = FastAPI()
+
+#configuracion de mongodb
+cliente = pymongo.MongoClient("mongodb+srv://gdlopez3:Emilia1707.@cluster0.eg0mcph.mongodb.net/?retryWrites=true&w=majority")
+database = cliente ["checkin"]
+coleccion = database["huespedes"]
 
 class Huesped (BaseModel):
     id: int
     hab: int
+    nombre: str
+    edad: int
+    ciudad: Optional[str] = None
+
+class HuespedEntrada (BaseModel):
     nombre: str
     edad: int
     ciudad: Optional[str] = None
