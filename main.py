@@ -64,7 +64,7 @@ personasList = []
 async def crear_huesped(person: HuespedEntrada):
     itemHuesped = Huesped (id=str(uuid.uuid4()), hab = person.hab, nombre = person.nombre, edad = person.edad, ciudad = person.ciudad)
     resultadoBase = coleccion.insert_one(itemHuesped.dict())
-    return person 
+    return itemHuesped
 
 @app.get("/huesped", response_model=List[Huesped], tags = ["huespedes"])
 def get_huesped():
