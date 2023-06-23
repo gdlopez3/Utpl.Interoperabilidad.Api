@@ -11,13 +11,13 @@ Utpl tnteroperabilidad API ayuda a crear un huesped, buscar en la base y/o elimi
 
 ## Huesped
 
-Tu puedes agragar un huesped./n
+Tu puedes agragar un huesped.
 Tu puedes listar los huespedes registrados.
 
 """
 
 app = FastAPI(
-    title="Utpl Interoperabilidad APP",
+    title="Utpl Interoperabilidad APP - caso practico",
     description= description,
     version="0.0.1",
     terms_of_service="http://example.com/terms/",
