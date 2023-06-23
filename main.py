@@ -7,11 +7,11 @@ import uuid
 import pymongo
 
 description = """
-Utpl tnteroperabilidad API ayuda a describir las capacidades de un directorio. 🚀
+Utpl tnteroperabilidad API ayuda a crear un huesped, buscar en la base y/o eliminarlo. 🚀
 
 ## Huesped
 
-Tu puedes agragar un huesped.
+Tu puedes agragar un huesped./n
 Tu puedes listar los huespedes registrados.
 
 """
