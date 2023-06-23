@@ -46,7 +46,7 @@ coleccion = database["huespedes"]
 
 
 class Huesped (BaseModel):
-    id: int
+    id: str
     hab: int
     nombre: str
     edad: int
