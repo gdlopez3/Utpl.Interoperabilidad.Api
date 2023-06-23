@@ -19,7 +19,7 @@ Tu puedes listar los huespedes registrados.
 app = FastAPI(
     title="Utpl Interoperabilidad APP - caso practico",
     description= description,
-    version="0.0.1",
+    version="semana 10",
     terms_of_service="http://example.com/terms/",
     contact={
         "name": "Galo López",
