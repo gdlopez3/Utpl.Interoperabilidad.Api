@@ -64,18 +64,18 @@ def crear_huesped(person: Huesped):
     personasList.append(person)
     return person 
 
-@app.get("/huesped", response_model=List[Huesped])
+@app.get("/huesped", response_model=List[Huesped], tags = ["huespedes"])
 def get_huesped():
             return personasList
 
-@app.get("/huesped/{huesped_hab}", response_model=Huesped)
+@app.get("/huesped/{huesped_hab}", response_model=Huesped, tags = ["huespedes"])
 def obtener_hab(huesped_hab: int):
     for hab in personasList:
         if huesped_hab == huesped_hab:
             return hab
     raise HTTPException(status_code=404, detail="huesped no encontrada")
 
-@app.delete("/huesped/{persona_id}")
+@app.delete("/huesped/{persona_id}", tags = ["huespedes"])
 def eliminar_huesped (persona_id: int):
     persona = next((p for p in personasList if p.id == persona_id), None)
     if persona:
