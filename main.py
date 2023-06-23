@@ -62,7 +62,7 @@ personasList = []
 
 @app.post("/huesped", response_model=HuespedEntrada, tags = ["huespedes"])
 async def crear_huesped(person: HuespedEntrada):
-    itemHuesped = Huesped (id= str(uuid.uuid4()),hab = person.hab, nombre = person.nombre, edad = person.edad, ciudad = person.ciudad)
+    itemHuesped = Huesped (id= str(uuid.uuid4()), hab = person.hab, nombre = person.nombre, edad = person.edad, ciudad = person.ciudad)
     resultadoBase = coleccion.insert_one(itemHuesped.dict())
     return person 
 
