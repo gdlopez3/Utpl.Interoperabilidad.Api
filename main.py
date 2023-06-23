@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
-import spotipy
 import uuid
 #seccion mongo_importar libreria
 import pymongo
