@@ -1,16 +1,43 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
+import spotipy
 import uuid
 #seccion mongo_importar libreria
 import pymongo
 
-app = FastAPI()
+description = """
+Utpl tnteroperabilidad API ayuda a describir las capacidades de un directorio. 🚀
+
+## Huesped
+
+Tu puedes agragar un huesped.
+Tu puedes listar los huespedes registrados.
+
+"""
+
+app = FastAPI(
+    title="Utpl Interoperabilidad APP",
+    description= description,
+    version="0.0.1",
+    terms_of_service="http://example.com/terms/",
+    contact={
+        "name": "Galo López",
+        "url": "https://github.com/gdlopez3/Utpl.Interoperabilidad.Api.git",
+        "email": "gdlopez3@utpl.edu.ec",
+    },
+    license_info={
+        "name": "Apache 2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
+    },    
+)
 
 #configuracion de mongodb
 cliente = pymongo.MongoClient("mongodb+srv://gdlopez3:Emilia1707.@cluster0.eg0mcph.mongodb.net/?retryWrites=true&w=majority")
 database = cliente ["checkin"]
 coleccion = database["huespedes"]
+
+
 
 class Huesped (BaseModel):
     id: int
