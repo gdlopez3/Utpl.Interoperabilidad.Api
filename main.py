@@ -15,6 +15,12 @@ Tu puedes agragar un huesped.
 Tu puedes listar los huespedes registrados.
 
 """
+tags_metadata = [
+    {
+        "name":"huespedes",
+        "description":"Permite realizar un crud completo de un huesped del hotel (listar)"
+    }
+]
 
 app = FastAPI(
     title="Utpl Interoperabilidad APP - caso practico",
@@ -29,7 +35,8 @@ app = FastAPI(
     license_info={
         "name": "Apache 2.0",
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
-    },    
+    }, 
+    openapi_tags = tags_metadata   
 )
 
 #configuracion de mongodb
@@ -53,7 +60,7 @@ class HuespedEntrada (BaseModel):
 
 personasList = []
 
-@app.post("/huesped", response_model=Huesped)
+@app.post("/huesped", response_model=Huesped, tags = ["huespedes"])
 def crear_huesped(person: Huesped):
     personasList.append(person)
     return person 
