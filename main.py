@@ -5,6 +5,11 @@ import uuid
 #seccion mongo_importar libreria
 import pymongo
 
+#configuracion de mongodb
+cliente = pymongo.MongoClient("mongodb+srv://gdlopez3:Emilia1707.@cluster0.eg0mcph.mongodb.net/?retryWrites=true&w=majority")
+database = cliente ["checkin"]
+coleccion = database["huespedes"]
+
 description = """
 Utpl tnteroperabilidad API ayuda a crear un huesped, buscar en la base y/o eliminarlo. 🚀
 
@@ -37,13 +42,6 @@ app = FastAPI(
     }, 
     openapi_tags = tags_metadata   
 )
-
-#configuracion de mongodb
-cliente = pymongo.MongoClient("mongodb+srv://gdlopez3:Emilia1707.@cluster0.eg0mcph.mongodb.net/?retryWrites=true&w=majority")
-database = cliente ["checkin"]
-coleccion = database["huespedes"]
-
-
 
 class Huesped (BaseModel):
     id: str
