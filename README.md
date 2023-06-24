@@ -1,6 +1,6 @@
 # Utpl.Interoperabilidad.Api
 
-Api para describir una persona
+Api para ingresar y editar un huesped
 
 ## Secuencia para despliegue
 1. Configurar el repositorio con el archivo requeriments.txt

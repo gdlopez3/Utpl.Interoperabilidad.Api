@@ -6,7 +6,7 @@ import uuid
 import pymongo
 
 #configuracion de mongodb
-cliente = pymongo.MongoClient("mongodb+srv://gdlopez3:Emilia1707.@cluster0.eg0mcph.mongodb.net/?retryWrites=true&w=majority")
+cliente = pymongo.MongoClient("mongodb+srv://interuser:qwerty123@cluster0.eg0mcph.mongodb.net/?retryWrites=true&w=majority")
 database = cliente ["checkin"]
 coleccion = database["huespedes"]
 
