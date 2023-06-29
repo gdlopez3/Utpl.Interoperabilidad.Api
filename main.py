@@ -4,6 +4,7 @@ from typing import List, Optional
 import uuid
 #seccion mongo_importar libreria
 import pymongo
+from fastapi_versioning import VersionedFastAPI, version
 
 #configuracion de mongodb
 cliente = pymongo.MongoClient("mongodb+srv://interuser:qwerty123@cluster0.eg0mcph.mongodb.net/?retryWrites=true&w=majority")
@@ -60,6 +61,7 @@ class HuespedEntrada (BaseModel):
 personasList = []
 
 @app.post("/huesped", response_model=Huesped, tags = ["huespedes"])
+@version
 async def crear_huesped(person: HuespedEntrada):
     print ('llego')
     itemHuesped = Huesped (id=str(uuid.uuid4()), hab = person.hab, nombre = person.nombre, edad = person.edad, ciudad = person.ciudad)
@@ -71,6 +73,7 @@ def get_huesped():
     itemHuesped = list(coleccion.find()) ##devolver de l abase de datos.
     return itemHuesped
 
+## busqueda por id
 @app.get("/huesped/{huesped_id}", response_model=Huesped, tags = ["huespedes"])
 def obtener_huesped(huesped_id: str):
     item = coleccion.find_one({"id": huesped_id})
@@ -78,7 +81,8 @@ def obtener_huesped(huesped_id: str):
         return item
     else:
         raise HTTPException(status_code=404, detail="Huesped no encontrado")
-    
+
+## Agregar busqueda por hab.    
 @app.get("/huesped/habitacion/{hab_num}", response_model=Huesped, tags = ["huespedes"])
 def obtener_hab(hab_num: int):
     item = coleccion.find_one({"hab": hab_num})
@@ -106,3 +110,6 @@ def eliminar_huesped (persona_id: int):
 @app.get("/")
 def read_root():
     return {"Hello": "TEST PARA LA APP EN LA NUBE ACTUALIZADO PARA CAPTURA DEBER"}
+
+
+app = VersionedFastAPI(app)
