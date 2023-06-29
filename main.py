@@ -68,14 +68,30 @@ async def crear_huesped(person: HuespedEntrada):
 
 @app.get("/huesped", response_model=List[Huesped], tags = ["huespedes"])
 def get_huesped():
-            return personasList
+    itemHuesped = list(coleccion.find()) ##devolver de l abase de datos.
+    return itemHuesped
 
-@app.get("/huesped/{huesped_hab}", response_model=Huesped, tags = ["huespedes"])
-def obtener_hab(huesped_hab: int):
-    for hab in personasList:
-        if huesped_hab == huesped_hab:
-            return hab
-    raise HTTPException(status_code=404, detail="huesped no encontrada")
+@app.get("/huesped/{huesped_id}", response_model=Huesped, tags = ["huespedes"])
+def obtener_huesped(huesped_id: str):
+    item = coleccion.find_one({"id": huesped_id})
+    if item:
+        return item
+    else:
+        raise HTTPException(status_code=404, detail="Huesped no encontrado")
+    
+@app.get("/huesped/habitacion/{hab_num}", response_model=Huesped, tags = ["huespedes"])
+def obtener_hab(hab_num: int):
+    item = coleccion.find_one({"hab": hab_num})
+    if item:
+        return item
+    else:
+        raise HTTPException(status_code=404, detail="Huesped no encontrado")
+
+    ##codigo sin base de datos
+    ##for hab in itemHuesped:
+      ##  if huesped_hab == huesped_hab:
+        ##    return hab
+    ##raise HTTPException(status_code=404, detail="huesped no encontrada")
 
 @app.delete("/huesped/{persona_id}", tags = ["huespedes"])
 def eliminar_huesped (persona_id: int):
