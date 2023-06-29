@@ -61,7 +61,7 @@ class HuespedEntrada (BaseModel):
 personasList = []
 
 @app.post("/huesped", response_model=Huesped, tags = ["huespedes"])
-@version
+@version(1,0)
 async def crear_huesped(person: HuespedEntrada):
     print ('llego')
     itemHuesped = Huesped (id=str(uuid.uuid4()), hab = person.hab, nombre = person.nombre, edad = person.edad, ciudad = person.ciudad)
@@ -69,12 +69,14 @@ async def crear_huesped(person: HuespedEntrada):
     return itemHuesped
 
 @app.get("/huesped", response_model=List[Huesped], tags = ["huespedes"])
+@version(1,0)
 def get_huesped():
     itemHuesped = list(coleccion.find()) ##devolver de l abase de datos.
     return itemHuesped
 
 ## busqueda por id
 @app.get("/huesped/{huesped_id}", response_model=Huesped, tags = ["huespedes"])
+@version(1,0)
 def obtener_huesped(huesped_id: str):
     item = coleccion.find_one({"id": huesped_id})
     if item:
@@ -84,6 +86,7 @@ def obtener_huesped(huesped_id: str):
 
 ## Agregar busqueda por hab.    
 @app.get("/huesped/habitacion/{hab_num}", response_model=Huesped, tags = ["huespedes"])
+@version(2,0)
 def obtener_hab(hab_num: int):
     item = coleccion.find_one({"hab": hab_num})
     if item:
@@ -98,6 +101,7 @@ def obtener_hab(hab_num: int):
     ##raise HTTPException(status_code=404, detail="huesped no encontrada")
 
 @app.delete("/huesped/{persona_id}", tags = ["huespedes"])
+@version(1,0)
 def eliminar_huesped (persona_id: int):
     persona = next((p for p in personasList if p.id == persona_id), None)
     if persona:
@@ -108,6 +112,7 @@ def eliminar_huesped (persona_id: int):
     huesped_eliminado = personasList.pop(persona_id)
 
 @app.get("/")
+@version(1,0)
 def read_root():
     return {"Hello": "TEST PARA LA APP EN LA NUBE ACTUALIZADO PARA CAPTURA DEBER"}
 
