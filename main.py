@@ -1,10 +1,13 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from typing import List, Optional
 import uuid
 #seccion mongo_importar libreria
 import pymongo
 from fastapi_versioning import VersionedFastAPI, version
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from auth import authenticate
+
 
 #configuracion de mongodb
 cliente = pymongo.MongoClient("mongodb+srv://interuser:qwerty123@cluster0.eg0mcph.mongodb.net/?retryWrites=true&w=majority")
@@ -44,6 +47,10 @@ app = FastAPI(
     openapi_tags = tags_metadata   
 )
 
+#para agregar seguridad a nuestro api
+security = HTTPBasic()
+
+
 class Huesped (BaseModel):
     id: str
     hab: int
@@ -74,6 +81,15 @@ def get_huesped():
     itemHuesped = list(coleccion.find()) ##devolver de l abase de datos.
     return itemHuesped
 
+def get_huesped(credentials: HTTPBasicCredentials = Depends(security)):
+    authenticate(credentials)
+    items = list(coleccion.find())
+    print (items)
+    return items
+
+
+
+
 ## busqueda por id
 @app.get("/huesped/{huesped_id}", response_model=Huesped, tags = ["huespedes"])
 @version(1,0)
@@ -93,12 +109,6 @@ def obtener_hab(hab_num: int):
         return item
     else:
         raise HTTPException(status_code=404, detail="Huesped no encontrado")
-
-    ##codigo sin base de datos
-    ##for hab in itemHuesped:
-      ##  if huesped_hab == huesped_hab:
-        ##    return hab
-    ##raise HTTPException(status_code=404, detail="huesped no encontrada")
 
 @app.delete("/huesped/{persona_id}", tags = ["huespedes"])
 @version(1,0)
